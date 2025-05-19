@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "399179364960",
+    "project_id": "plinkomerge",
+    "storage_bucket": "plinkomerge.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:399179364960:android:37557ef053cf5aaeb6a105",
+        "android_client_info": {
+          "package_name": "com.ADCompany.PlinkoMerge"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbf2Ao6X4eOb2eM7q53LRcsNPlkhPMxLo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
