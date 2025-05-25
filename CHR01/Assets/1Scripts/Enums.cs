@@ -16,4 +16,12 @@ public class Enums
         Successfull,
         Unsuccessfull,
     }
+
+    public enum ObjectType
+    {
+        Obstacle,
+        Trash,
+        Bonus,
+        
+    }
 }
