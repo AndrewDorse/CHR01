@@ -6,9 +6,15 @@ public class LevelController : MonoBehaviour
 {
     public static LevelController Instance;
 
+    public static ChickenController ChickenController => Instance._character;
+
     public int Value => _value;
     public int Amount => _amount;
     public int ValueToWin => _valueToWin;
+
+
+
+    [SerializeField] private ChickenController _character;
 
     [SerializeField] private Ball _ballPrefab;
     [SerializeField] private Transform _createPosition;
@@ -86,6 +92,8 @@ public class LevelController : MonoBehaviour
 
     public void CreateLevel()
     {
+        return;
+
         _value = 2;
         _amount = 1;
         _victory = false;
