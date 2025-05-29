@@ -9,7 +9,7 @@ public class OblectsOnRoadController : MonoBehaviour
 
     [SerializeField] private BoxCollider _creationArea;
     [SerializeField] private BoxCollider _creationAreaOnSideOfRoad;
-
+    [SerializeField] private BoxCollider _creationAreaOnSideOfRoad2;
 
     [SerializeField] private Renderer _roadRenderer;
     [SerializeField] private float _roadRendererParamerter;
@@ -32,8 +32,17 @@ public class OblectsOnRoadController : MonoBehaviour
         if(_cd <= 0)
         {
             CreateObjectOnRoad();
-            CreateObjectOnSideOfRoad();
-            _cd = UnityEngine. Random.Range(0.3f, 1f);
+
+            if (UnityEngine.Random.Range(0, 100) < 50)
+            {
+                CreateObjectOnSideOfRoad();
+            }
+            else
+            {
+                CreateObjectOnSideOfRoad2();
+            }
+                
+                _cd = UnityEngine. Random.Range(0.3f, 1f);
         }
 
         _cd -= Time.deltaTime;
@@ -55,7 +64,7 @@ public class OblectsOnRoadController : MonoBehaviour
 
         ObjectOnRoad newObject = Instantiate(_prefabs[UnityEngine.Random.Range(0, _prefabs.Length)], pos, Quaternion.identity);
         newObject.Setup(_speed);
-    }
+    } 
 
     private void CreateObjectOnSideOfRoad()
     {
@@ -63,7 +72,15 @@ public class OblectsOnRoadController : MonoBehaviour
 
         ObjectOnRoad newObject = Instantiate(_prefabsSide[UnityEngine.Random.Range(0, _prefabsSide.Length)], pos, Quaternion.identity);
         newObject.Setup(_speed);
-    } 
+    }
+
+    private void CreateObjectOnSideOfRoad2()
+    {
+        Vector3 pos = RandomPointInBounds(_creationAreaOnSideOfRoad2.bounds);
+
+        ObjectOnRoad newObject = Instantiate(_prefabsSide[UnityEngine.Random.Range(0, _prefabsSide.Length)], pos, Quaternion.identity);
+        newObject.Setup(_speed);
+    }
 
     private Vector3 RandomPointInBounds(Bounds bounds)
     {
