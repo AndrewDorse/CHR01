@@ -17,21 +17,7 @@ public class ObjectOnRoadTrash : ObjectOnRoad
     }
 
     public override void FixedUpdate()
-    {
-        if(_afterHit == true)
-        {
-            if(ChickenController.instance.transform.position.x < transform.position.x)
-            {
-               // _rigidbody.AddForce(-Vector3.forward * 3 + Vector3.right * 2, ForceMode.Impulse);
-            }
-            else
-            {
-              //  _rigidbody.AddForce(-Vector3.forward * 3 + Vector3.right * -2, ForceMode.Impulse);
-            }
-            
-            return;
-        }
-
+    { 
         base.FixedUpdate();
     }
 
@@ -65,6 +51,6 @@ public class ObjectOnRoadTrash : ObjectOnRoad
     {
         yield return new WaitForSeconds(3);
 
-        Destroy(gameObject);
+        OblectsOnRoadController.Instance.RemoveObject(gameObject);
     }
 }

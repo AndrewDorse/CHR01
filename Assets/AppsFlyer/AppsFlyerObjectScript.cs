@@ -68,7 +68,9 @@ public class AppsFlyerObjectScript : MonoBehaviour , IAppsFlyerConversionData
 
         foreach (KeyValuePair<string, object> entry in conversionDataDictionary)
         {
-            //  Debug.Log(entry.Key + " "+ entry.Value.ToString());
+            if(entry.Value != null)
+
+              Debug.Log(entry.Key + " "+ entry.Value.ToString() );
         }
 
 

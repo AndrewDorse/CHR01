@@ -20,7 +20,7 @@ public static class EventsProvider
 
     public static Action<bool> OnConfigRequestDone;
 
-    public static Action<float> OnBallMerged;
+    public static Action<float> OnScoreChanged;
 
     public static Action<DeviceOrientation> OnOrientationChanged;
 

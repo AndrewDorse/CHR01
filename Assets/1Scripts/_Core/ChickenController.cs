@@ -34,6 +34,9 @@ public class ChickenController : MonoBehaviour
         Debug.Log("### GOT DA<AGE");
 
         GameObject effect = ObjectsPool.Spawn<GameObject>(_effectHit, transform.position, transform.rotation);
+
+        LevelController.Instance.Lives--;
+        LevelController.Instance.GotDamage();
     }
 
 }

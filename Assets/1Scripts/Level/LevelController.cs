@@ -1,24 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UniWebViewLogger;
 
 public class LevelController : MonoBehaviour
 {
     public static LevelController Instance;
 
     public static ChickenController ChickenController => Instance._character;
+    public float Score
+    {
+        get
+        {
+            return _score;
+        }
+        set
+        {
+            _score = value;
 
+            EventsProvider.OnScoreChanged?.Invoke(_score);
+        }
+    }
     public int Value => _value;
     public int Amount => _amount;
     public int ValueToWin => _valueToWin;
 
+    public int Lives 
+    { 
+        get
+        {
+            return _lives;
+        }
 
+        internal set
+        {
+            _lives = value; 
+        } 
+    }
 
     [SerializeField] private ChickenController _character;
 
     [SerializeField] private Ball _ballPrefab;
     [SerializeField] private Transform _createPosition;
-
+    [SerializeField] private OblectsOnRoadController _oblectsOnRoadController;
 
     private float _needToWin;
 
@@ -32,6 +56,7 @@ public class LevelController : MonoBehaviour
     private bool _victory;
     private float _score;
     private int _valueToWin;
+    private int _lives;
 
     private void Awake()
     { 
@@ -43,31 +68,32 @@ public class LevelController : MonoBehaviour
 
         Instance = this;
         _balls = new();
+         
+    }  
 
-        EventsProvider.OnBallMerged += BallMerged;
-    } 
-
-    private void BallMerged(float value)
+    public void GotDamage()
     {
-        _score += value/30;
-
-        if (_valueToWin <= value)
+        if (_victory == false)
         {
-            Victory();
+            if (_lives <= 0)
+            {
+                GameOver();
+            }
         }
     }
 
-    private void Victory()
+
+    private void GameOver()
     { 
         if (_victory == false)
         {
             _victory = true;
 
-            if( _levelSettings.level + 1 > SaveManager.SaveModel.Level)
-            {
-                SaveManager.SaveModel.Level++;  
-                SaveManager.Save();
-            }
+            //if( _levelSettings.level + 1 > SaveManager.SaveModel.Level)
+            //{
+            //    SaveManager.SaveModel.Level++;  
+            //    SaveManager.Save();
+            //}
 
             WinPopup popup = Master.UIController.GetPopup<WinPopup>();
 
@@ -90,8 +116,13 @@ public class LevelController : MonoBehaviour
         }
     }
 
-    public void CreateLevel()
+    public void StartLevel()
     {
+        _lives = 3;
+
+
+        _oblectsOnRoadController.StartLevel();
+
         return;
 
         _value = 2;
@@ -142,6 +173,7 @@ public class LevelController : MonoBehaviour
 
     private void ResetLevel()
     {
+        Lives = 3;
         _value = 2;
         _amount = 1;
         _victory = false;
@@ -245,7 +277,7 @@ public class LevelController : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventsProvider.OnBallMerged += BallMerged;
+         
     }
 }
 

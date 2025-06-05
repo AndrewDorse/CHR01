@@ -1,5 +1,6 @@
 {
     "name": "AppsFlyer",
+    "rootNamespace": "",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

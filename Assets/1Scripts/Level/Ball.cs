@@ -1,4 +1,4 @@
-using Hellmade.Sound;
+//using Hellmade.Sound;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -58,8 +58,8 @@ public class Ball : MonoBehaviour
         StartCoroutine(Coroutine());
 
         CreateEffectMultiply();
-        EventsProvider.OnBallMerged?.Invoke(_amount);
-        EazySoundManager.PlaySound(AudioClipGameStorage.RandomImprove, volume: 0.6f);
+       
+       // EazySoundManager.PlaySound(AudioClipGameStorage.RandomImprove, volume: 0.6f);
     }
 
     public void Upgrade()
@@ -72,7 +72,7 @@ public class Ball : MonoBehaviour
 
         _amount *= 2;
 
-        EventsProvider.OnBallMerged?.Invoke(_amount);
+       
 
         _text.text = _amount.ToString();
         _rigidbody.AddForce(Vector3.up * 200f, ForceMode.Impulse);
@@ -81,7 +81,7 @@ public class Ball : MonoBehaviour
 
         SaveManager.SaveModel.Gold += Mathf.RoundToInt(_amount / 4);
 
-        EazySoundManager.PlaySound(AudioClipGameStorage.RandomImprove, volume: 0.6f);
+      //  EazySoundManager.PlaySound(AudioClipGameStorage.RandomImprove, volume: 0.6f);
 
         if (gameObject.activeInHierarchy)
         {

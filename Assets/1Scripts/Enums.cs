@@ -22,6 +22,6 @@ public class Enums
         Obstacle,
         Trash,
         Bonus,
-        
+        Heart,
     }
 }

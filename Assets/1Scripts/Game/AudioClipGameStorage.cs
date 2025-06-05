@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Hellmade.Sound;
+//using Hellmade.Sound;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -64,17 +64,17 @@ public class AudioClipGameStorage : MonoBehaviour
 
         if (SaveManager.SaveModel.Sound == false)
         {
-            EazySoundManager.GlobalVolume = 0f;
+           // EazySoundManager.GlobalVolume = 0f;
         }
         else
         {
-            EazySoundManager.GlobalVolume = 0.86f;
+          //  EazySoundManager.GlobalVolume = 0.86f;
         }
     }
 
     private void PlayClick()
     {
-        EazySoundManager.PlaySound(AudioClipGameStorage.RandomClick, volume: 0.6f);
+        //EazySoundManager.PlaySound(AudioClipGameStorage.RandomClick, volume: 0.6f);
     }
 
     private void OnDestroy()
@@ -107,7 +107,7 @@ public class AudioClipGameStorage : MonoBehaviour
             return;
         }
         
-        EazySoundManager.PlaySound(soundFX);
+       // EazySoundManager.PlaySound(soundFX);
     }
 
     private static void PlayRandomBackgroundMusic(AudioClip soundFX)
@@ -117,23 +117,23 @@ public class AudioClipGameStorage : MonoBehaviour
             return;
         }
         
-        EazySoundManager.PlayMusic(soundFX, 1f, true, true, 1f, 1f);
+        //EazySoundManager.PlayMusic(soundFX, 1f, true, true, 1f, 1f);
         instance._backgroundMusicStarted = true;
     }
     
     public static void ResumeAllBackgroundMusic()
     {
-        EazySoundManager.ResumeAllMusic();
+        //EazySoundManager.ResumeAllMusic();
     }
     
     public static void PauseAllBackgroundMusic()
     {
-        EazySoundManager.PauseAllMusic();
+        //EazySoundManager.PauseAllMusic();
     }
 
     public static void StopALlBackgroundMusic()
     {
-        EazySoundManager.StopAllMusic();
+        //EazySoundManager.StopAllMusic();
     }
     
      

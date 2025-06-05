@@ -5,8 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 using UnityEngine.UI;
-using static Enums;
-using AppsFlyerSDK;
+using static Enums; 
 using System.Collections.Generic;
 
 

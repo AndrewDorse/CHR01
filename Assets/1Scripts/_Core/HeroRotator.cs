@@ -19,7 +19,7 @@ public class HeroRotator : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     private void Start()
     {
-        _character = LevelController.ChickenController.gameObject;
+        _character = LevelController.ChickenController.gameObject; 
     }
 
     private void Update()

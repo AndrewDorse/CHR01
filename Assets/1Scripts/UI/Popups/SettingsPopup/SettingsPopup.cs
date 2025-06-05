@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Hellmade.Sound;
+//using Hellmade.Sound;
 
 public class SettingsPopup : Popup
 {
@@ -57,11 +57,11 @@ public class SettingsPopup : Popup
 
         if (SaveManager.SaveModel.Sound == false)
         {
-            EazySoundManager.GlobalVolume = 0f;
+            //EazySoundManager.GlobalVolume = 0f;
         }
         else
         {
-            EazySoundManager.GlobalVolume = 0.8f;
+         //   EazySoundManager.GlobalVolume = 0.8f;
         }
 
         UpdateButtonsView();

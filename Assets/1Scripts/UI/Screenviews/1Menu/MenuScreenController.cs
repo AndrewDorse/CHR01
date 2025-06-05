@@ -25,7 +25,7 @@ public class MenuScreenController : ScreenController
     private void StartBattle()
     {
         EventsProvider.OnAnyButtonClick?.Invoke();
-        LevelController.Instance.CreateLevel();
+        LevelController.Instance.StartLevel();
 
         Master.GameStageController.ChangeStage(Enums.GameStage.Playmode);
     } 

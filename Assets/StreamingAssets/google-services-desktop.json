@@ -1,26 +1,28 @@
 {
   "project_info": {
-    "project_number": "399179364960",
-    "project_id": "plinkomerge",
-    "storage_bucket": "plinkomerge.firebasestorage.app"
+    "project_number": "860180975313",
+    "project_id": "eggscape-route",
+    "storage_bucket": "eggscape-route.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:399179364960:android:37557ef053cf5aaeb6a105",
+        "mobilesdk_app_id": "1:860180975313:ios:5979bca7f64a8bea033ff0",
         "android_client_info": {
-          "package_name": "com.ADCompany.PlinkoMerge"
+          "package_name": "com.ADGames.EggscapeRoute"
         }
       },
-      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDbf2Ao6X4eOb2eM7q53LRcsNPlkhPMxLo"
+          "current_key": "AIzaSyAjAg2lajARdHMqTamfi6k8kNx8FszuIqo"
         }
       ],
       "services": {
+        "analytics_service": {
+          "status": 0
+        },
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "status": 1
         }
       }
     }

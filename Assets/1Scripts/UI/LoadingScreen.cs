@@ -43,7 +43,8 @@ public class LoadingScreen : MonoBehaviour
 
         if (gameObject.activeInHierarchy)
         {
-            _canvasGroup.DOFade(0, 0.01f).SetUpdate(true).OnComplete(() => gameObject.SetActive(false));
+            gameObject.SetActive(false);
+            //_canvasGroup.DOFade(0, 0.01f).SetUpdate(true).OnComplete(() => gameObject.SetActive(false));
         }
     } 
 

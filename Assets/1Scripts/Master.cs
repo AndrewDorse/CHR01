@@ -1,12 +1,14 @@
- 
+
+using AppsFlyerSDK;
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 using UnityEngine.Android; 
 
 
-public class Master : MonoBehaviour
+public class Master : MonoBehaviour //, IAppsFlyerConversionData
 {
     public static Master Instance;
 
@@ -28,8 +30,7 @@ public class Master : MonoBehaviour
     [SerializeField] private Transform _viewTransform;
 
     private GameStageController _gameStageController;
-
-    private static string _URL = "https://benioosn.com/sTpWMd";
+     
     private UniWebView _webview;
     private float _timeToShow = 0.4f;
     private bool _loading = false;
@@ -48,8 +49,7 @@ public class Master : MonoBehaviour
         DontDestroyOnLoad(this);
         SaveManager.Load();
         _gameStageController = new GameStageController();
-
-
+         
         Screen.autorotateToLandscapeLeft = false;
         Screen.autorotateToLandscapeRight = false;
         Screen.autorotateToPortrait = false;
@@ -58,16 +58,7 @@ public class Master : MonoBehaviour
         Screen.orientation = ScreenOrientation.Portrait;
 
         QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 60;
-
-        //AndroidJavaClass up = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-        //AndroidJavaObject currentActivity = up.GetStatic<AndroidJavaObject>("currentActivity");
-        //AndroidJavaObject contentResolver = currentActivity.Call<AndroidJavaObject>("getContentResolver");
-        //AndroidJavaClass secure = new AndroidJavaClass("android.provider.Settings$Secure");
-        //string android_id = secure.CallStatic<string>("getString", contentResolver, "android_id");
-
-        //Debug.Log(android_id + "   " + SystemInfo.deviceUniqueIdentifier);
-        //SystemInfo.deviceUniqueIdentifier
+        Application.targetFrameRate = 60; 
     }
 
 
@@ -90,7 +81,7 @@ public class Master : MonoBehaviour
         }
 
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_ANDROID
         UIController.SetLoadingScreen();
         LaunchGame(); 
 
@@ -383,7 +374,37 @@ public class Master : MonoBehaviour
         }
 
         return null;
-    } 
+    }
+
+    //public void onConversionDataSuccess(string conversionData)
+    //{
+    //    AppsFlyer.AFLog("didReceiveConversionData", conversionData);
+
+    //    Dictionary<string, object> conversionDataDictionary = AppsFlyer.CallbackStringToDictionary(conversionData);
+
+
+    //    foreach (KeyValuePair<string, object> entry in conversionDataDictionary)
+    //    {
+    //        if (entry.Value != null)
+
+    //            Debug.Log(entry.Key + " " + entry.Value.ToString());
+    //    }
+    //}
+
+    //public void onConversionDataFail(string error)
+    //{
+    //    //throw new System.NotImplementedException();
+    //}
+
+    //public void onAppOpenAttribution(string attributionData)
+    //{
+    //   // throw new System.NotImplementedException();
+    //}
+
+    //public void onAppOpenAttributionFailure(string error)
+    //{
+    //    //throw new System.NotImplementedException();
+    //}
 }
 
 [System.Serializable]
