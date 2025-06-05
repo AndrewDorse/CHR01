@@ -5,18 +5,13 @@ public class PlayModeScreenView : ScreenView
 {
     public Button dropBallButton;
     public Button backToMenuButton;
-    public Button increaseBallsButton;
-    public Button increaseValueButton;
-    public Button decreaseBallsButton;
-    public Button decreaseValueButton;
+    
 
 
-    public TMPro.TMP_Text ballAmountText;
-    public TMPro.TMP_Text ballValueText;
+     
 
-    public TMPro.TMP_Text moneyAmount;
-    public TMPro.TMP_Text ballToWinText;
-
+    public TMPro.TMP_Text scoreAmount; 
+    public GameObject[] lifes;
 
     public override ScreenController Construct()
     {

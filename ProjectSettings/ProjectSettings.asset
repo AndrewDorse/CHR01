@@ -166,14 +166,14 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.ADGames.EggscapeRoute
     Standalone: com.Unity-Technologies.com.unity.template.urp-blank
-    iPhone: com.ADGames.ChickenHustle
+    iPhone: com.ADGames.EggscapeRoute
   buildNumber:
     Standalone: 0
     VisionOS: 0
-    iPhone: 12
+    iPhone: 16
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 12
+  AndroidBundleVersionCode: 16
   AndroidMinSdkVersion: 24
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -293,7 +293,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 1c45cc70d3fed914491ade7a6d4b6f41, type: 3}
+      m_Icon: {fileID: 2800000, guid: e8ae9c866ef399048986068c4d224ea3, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0

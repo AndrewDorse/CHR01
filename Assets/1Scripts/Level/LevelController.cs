@@ -7,7 +7,14 @@ public class LevelController : MonoBehaviour
 {
     public static LevelController Instance;
 
+
+
     public static ChickenController ChickenController => Instance._character;
+
+    public PlayableCharacter[] PlayableCharacters;
+
+    private GameObject _curModel;
+
     public float Score
     {
         get
@@ -34,7 +41,14 @@ public class LevelController : MonoBehaviour
 
         internal set
         {
-            _lives = value; 
+            _lives = value;
+
+            if(_lives > 3)
+            {
+                _lives = 3;
+            }
+
+            EventsProvider.OnLivesChanged?.Invoke(_lives);
         } 
     }
 
@@ -97,7 +111,7 @@ public class LevelController : MonoBehaviour
 
             WinPopup popup = Master.UIController.GetPopup<WinPopup>();
 
-            SaveManager.SendResult(_levelSettings.level, _score) ;
+            SaveManager.SendResult(1, _score) ;
 
 
             popup.Setup(null,
@@ -108,11 +122,14 @@ public class LevelController : MonoBehaviour
                 },
                 () =>
                 {
-                    ResetLevel();
+                    ResetLevel(); 
+                    StartLevel();
                 },
                 _score,
-                SaveManager.GetResult(_levelSettings.level, _score)
+                SaveManager.GetResult(1, _score)
                 );
+
+            ResetLevel();
         }
     }
 
@@ -120,8 +137,17 @@ public class LevelController : MonoBehaviour
     {
         _lives = 3;
 
+        Time.timeScale = 1;
 
         _oblectsOnRoadController.StartLevel();
+
+
+        if(_curModel != null)
+        {
+            Destroy(_curModel);
+        }
+
+        _curModel = Instantiate(PlayableCharacters[SaveManager.SaveModel.CharacterNumber - 1].prefabGame, ChickenController.transform);
 
         return;
 
@@ -171,27 +197,32 @@ public class LevelController : MonoBehaviour
             _level = Instantiate(_levelSettings.levelPrefab);
     }
 
-    private void ResetLevel()
+    public void ResetLevel()
     {
         Lives = 3;
-        _value = 2;
-        _amount = 1;
+         
         _victory = false;
-        _score = 1000;
+        _score = 0;
 
-        foreach (var ball in _balls)
-        {
-            Destroy(ball.gameObject);
-        }
+        _oblectsOnRoadController.StopLevel();
 
-        _balls = new List<Ball>();
+        ChickenController.transform.position = Vector3.zero;
 
-        if (_level != null)
-        {
-            Destroy(_level);
-        }
+        Time.timeScale = 0;
 
-        _level = Instantiate(_levelSettings.levelPrefab);
+        //foreach (var ball in _balls)
+        //{
+        //    Destroy(ball.gameObject);
+        //}
+
+        //_balls = new List<Ball>();
+
+        //if (_level != null)
+        //{
+        //    Destroy(_level);
+        //}
+
+        //_level = Instantiate(_levelSettings.levelPrefab);
     }
 
     public void SendBall()
@@ -233,7 +264,7 @@ public class LevelController : MonoBehaviour
             _amount = 1;
         }
 
-        EventsProvider.OnAmountChanged?.Invoke(_amount);
+       // EventsProvider.OnAmountChanged?.Invoke(_amount);
     }
 
     public void IncreaseValue()
@@ -266,7 +297,7 @@ public class LevelController : MonoBehaviour
             _value = 2;
         }
 
-        EventsProvider.OnValueChanged?.Invoke(_value);
+       //EventsProvider.OnValueChanged?.Invoke(_value);
     }
 
     public void RemoveBall(Ball ball)

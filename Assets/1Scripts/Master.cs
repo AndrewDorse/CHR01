@@ -81,7 +81,7 @@ public class Master : MonoBehaviour //, IAppsFlyerConversionData
         }
 
 
-#if UNITY_EDITOR || UNITY_ANDROID
+#if UNITY_EDITOR ///|| UNITY_ANDROID
         UIController.SetLoadingScreen();
         LaunchGame(); 
 

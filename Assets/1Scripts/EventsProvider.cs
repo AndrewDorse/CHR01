@@ -14,13 +14,13 @@ public static class EventsProvider
 
     public static Action OnSaveModelChanged;
 
-    public static Action<int> OnAmountChanged;
-    public static Action<int> OnValueChanged;
+    
 
 
     public static Action<bool> OnConfigRequestDone;
 
     public static Action<float> OnScoreChanged;
+    public static Action<int> OnLivesChanged;
 
     public static Action<DeviceOrientation> OnOrientationChanged;
 

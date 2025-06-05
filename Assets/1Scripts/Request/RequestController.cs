@@ -86,17 +86,17 @@ public static class RequestController
     public static bool FirebaseDataRecieved = false;
     public static bool AppsFlyerDataRecieved = false;
 
-    public static string FirebaseProjectId = "399179364960";
-    public static string FirebaseMessagingToken = "elb1oLoCT5iwEXr2xBPY0J:APA91bFu5mMDpD6twZg7ltcKlvRFHVhRAfrk4oUExRHgc-l2Jq1zStWpm2dNSvu2UBQJRs4Fxq5_8aYCmS2354tS3tcqGFcN0MugZaz3iYmqSjtRh50q-8k";
+    public static string FirebaseProjectId = "860180975313"; // CHANGE MYSELF DONE
+    public static string FirebaseMessagingToken; // getting from firebase sdk
 
-    public static string AppsFlyerId = "1744191756889-8092823156382116271";
-    public static string InstallTime = "2025-04-09 08:42:14.457";
-    public static string AfStatus;
-    public static string AfMessage;
-    public static string BundleId = "com.ADCompany.PlinkoMerge";
+    public static string AppsFlyerId; // getting from appsflyer sdk 
+    public static string InstallTime; // getting from appsflyer sdk 
+    public static string AfStatus; // getting from appsflyer sdk
+    public static string AfMessage; // getting from appsflyer sdk
+    public static string BundleId = Application.identifier; //  
 
 
-    private static readonly string _url = "https://pumkorich.com/config.php";
+    private static readonly string _url = "https://eggscaperoute.com/config.php"; // CHANGE MYSELF DONE
 
 
     public static void SendRequest()

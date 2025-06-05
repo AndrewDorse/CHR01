@@ -16,10 +16,7 @@ public class ObjectOnRoadTrash : ObjectOnRoad
         _rigidbody.isKinematic = true;
     }
 
-    public override void FixedUpdate()
-    { 
-        base.FixedUpdate();
-    }
+    
 
     public override void Hit()
     {

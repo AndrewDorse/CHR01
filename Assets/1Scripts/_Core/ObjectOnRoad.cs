@@ -2,13 +2,15 @@ using UnityEngine;
 
 public class ObjectOnRoad : MonoBehaviour
 {
+    public Enums.ObjectType Type => _type;
+
     [SerializeField] private protected float _speed;
     [SerializeField] private protected Enums.ObjectType _type = Enums.ObjectType.Obstacle; 
 
      
-    public virtual void FixedUpdate()
+    public virtual void Update()
     {
-        transform.Translate(-Vector3.forward * _speed/100);
+        transform.Translate(-Vector3.forward * _speed/3 * Time.deltaTime);
 
         if(transform.position.z < -5)
         {

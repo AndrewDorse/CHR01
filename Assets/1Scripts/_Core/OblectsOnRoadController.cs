@@ -50,11 +50,16 @@ public class OblectsOnRoadController : MonoBehaviour
 
     public void StopLevel()
     {
+        for (int i = 0; i < _currentObjects.Count; i++)
+        {
+            Destroy(_currentObjects[i]);
+        }
+
+        _currentObjects.Clear();
+
         _enabled = false;
-    }
-
-
-
+    }   
+     
     private void Update()
     {
         if(_enabled == false)
@@ -92,7 +97,7 @@ public class OblectsOnRoadController : MonoBehaviour
 
         
 
-        _speed += Time.deltaTime / 55f; 
+        _speed += Time.deltaTime / 25f; 
     }
 
     private void TryCreateBonuses()
@@ -116,6 +121,7 @@ public class OblectsOnRoadController : MonoBehaviour
 
         ObjectOnRoad newObject = ObjectsPool.Spawn<ObjectOnRoad>(_prefabRoadMark, pos, Quaternion.identity);
         newObject.Setup(_speed);
+        _currentObjects.Add(newObject.gameObject);
     }
 
     private void CreateObjectOnRoad()
@@ -177,7 +183,7 @@ public class OblectsOnRoadController : MonoBehaviour
 
         for (int i = 0; i < _currentObjects.Count; i++)
         {
-            if (Vector3.Distance(pos, _currentObjects[i].transform.position) < 0.5f)
+            if (Vector3.Distance(pos, _currentObjects[i].transform.position) < 1f)
             {
                 return false;
             }

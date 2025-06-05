@@ -10,7 +10,7 @@ public class MenuScreenView : ScreenView
 
     public Button privacyPolicyButton;
     public Button settingsButton;
-
+    public Button skinsButton;
 
     public override ScreenController Construct()
     {

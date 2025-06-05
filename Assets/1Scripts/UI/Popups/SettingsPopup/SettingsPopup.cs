@@ -31,6 +31,11 @@ public class SettingsPopup : Popup
         });
 
 
+        _backBGButton.onClick.AddListener(() =>
+        {
+            Time.timeScale = 1f;
+        });
+
         if (Master.GameStageController.currentStage == Enums.GameStage.Playmode)
         {
             _goToMenuButton.gameObject.SetActive(true);
@@ -40,6 +45,8 @@ public class SettingsPopup : Popup
                 EventsProvider.OnAnyButtonClick?.Invoke();
                 Close();
                 Master.GameStageController.ChangeStage(Enums.GameStage.Menu);
+
+                LevelController.Instance.ResetLevel();
             });
         }
         else

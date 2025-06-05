@@ -36,7 +36,7 @@ public class SaveModel
     public bool Sound = false;
 
     public List<BestResultSlot> BestResults;
-
+    public int CharacterNumber = 1;
 
     public SaveModel()
     {
