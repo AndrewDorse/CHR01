@@ -33,8 +33,8 @@ public static class SaveManager
         }
 
         _saveModel = model;
-        Debug.Log("### LastAskForNotifications  = " + SaveManager.SaveModel.LastAskForNotifications);
-        Debug.Log("### save  = " + data);
+       // Debug.Log("### LastAskForNotifications  = " + SaveManager.SaveModel.LastAskForNotifications);
+       // Debug.Log("### save  = " + data);
 
         
         Save();

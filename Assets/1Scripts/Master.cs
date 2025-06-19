@@ -3,12 +3,15 @@ using AppsFlyerSDK;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+//using UnityEditor.Callbacks;
+//using UnityEditor.iOS.Xcode;
+//using UnityEditor;
 using UnityEngine;
 
 using UnityEngine.Android; 
 
 
-public class Master : MonoBehaviour //, IAppsFlyerConversionData
+public class Master : MonoBehaviour
 {
     public static Master Instance;
 
@@ -81,9 +84,9 @@ public class Master : MonoBehaviour //, IAppsFlyerConversionData
         }
 
 
-#if UNITY_EDITOR ///|| UNITY_ANDROID
+#if UNITY_EDITOR
         UIController.SetLoadingScreen();
-        LaunchGame(); 
+        LaunchGame();
 
         return;
 #endif
@@ -376,35 +379,7 @@ public class Master : MonoBehaviour //, IAppsFlyerConversionData
         return null;
     }
 
-    //public void onConversionDataSuccess(string conversionData)
-    //{
-    //    AppsFlyer.AFLog("didReceiveConversionData", conversionData);
-
-    //    Dictionary<string, object> conversionDataDictionary = AppsFlyer.CallbackStringToDictionary(conversionData);
-
-
-    //    foreach (KeyValuePair<string, object> entry in conversionDataDictionary)
-    //    {
-    //        if (entry.Value != null)
-
-    //            Debug.Log(entry.Key + " " + entry.Value.ToString());
-    //    }
-    //}
-
-    //public void onConversionDataFail(string error)
-    //{
-    //    //throw new System.NotImplementedException();
-    //}
-
-    //public void onAppOpenAttribution(string attributionData)
-    //{
-    //   // throw new System.NotImplementedException();
-    //}
-
-    //public void onAppOpenAttributionFailure(string error)
-    //{
-    //    //throw new System.NotImplementedException();
-    //}
+   
 }
 
 [System.Serializable]
