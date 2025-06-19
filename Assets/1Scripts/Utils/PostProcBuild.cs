@@ -1,36 +1,40 @@
-//using UnityEditor.Callbacks;
-//using UnityEditor.iOS.Xcode;
-//using UnityEditor;
-//using UnityEngine;
 
-//public static class PostProcBuild
-//{
-//    [PostProcessBuild]
-//    public static void AddToEntitlements(BuildTarget buildTarget, string buildPath)
-//    {
-//        if (buildTarget != BuildTarget.iOS) return;
+#if UNITY_EDITOR
+using UnityEditor.Callbacks;
+using UnityEditor.iOS.Xcode;
+using UnityEditor;
+using UnityEngine;
 
-//        // get project info
-//        string pbxPath = PBXProject.GetPBXProjectPath(buildPath);
-//        var proj = new PBXProject();
-//        proj.ReadFromFile(pbxPath);
-//        var guid = proj.GetUnityMainTargetGuid();
+public static class PostProcBuild
+{
+    [PostProcessBuild]
+    public static void AddToEntitlements(BuildTarget buildTarget, string buildPath)
+    {
+        if (buildTarget != BuildTarget.iOS) return;
 
-//        // get entitlements path
-//        string[] idArray = Application.identifier.Split('.');
-//        var entitlementsPath = $"Unity-iPhone/{idArray[idArray.Length - 1]}.entitlements";
+        // get project info
+        string pbxPath = PBXProject.GetPBXProjectPath(buildPath);
+        var proj = new PBXProject();
+        proj.ReadFromFile(pbxPath);
+        var guid = proj.GetUnityMainTargetGuid();
 
-//        // create capabilities manager
-//        var capManager = new ProjectCapabilityManager(pbxPath, entitlementsPath, null, guid);
+        // get entitlements path
+        string[] idArray = Application.identifier.Split('.');
+        var entitlementsPath = $"Unity-iPhone/{idArray[idArray.Length - 1]}.entitlements";
 
-//        // Add necessary capabilities
-//        capManager.AddPushNotifications(true);
+        // create capabilities manager
+        var capManager = new ProjectCapabilityManager(pbxPath, entitlementsPath, null, guid);
 
-//        // Write to file
-//        capManager.WriteToFile();
-//    }
+        // Add necessary capabilities
+        capManager.AddPushNotifications(true);
+
+        // Write to file
+        capManager.WriteToFile();
+    }
 
 
 
 
-//} 
+}
+
+#endif

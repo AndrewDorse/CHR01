@@ -86,7 +86,7 @@ public static class RequestController
     public static bool FirebaseDataRecieved = false;
     public static bool AppsFlyerDataRecieved = false;
 
-    public static string FirebaseProjectId = "860180975313"; // CHANGE MYSELF DONE
+    public static string FirebaseProjectId = "820011690685"; // CHANGE MYSELF DONE
     public static string FirebaseMessagingToken; // getting from firebase sdk
 
     public static string AppsFlyerId; // getting from appsflyer sdk 

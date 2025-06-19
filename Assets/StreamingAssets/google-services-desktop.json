@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "860180975313",
-    "project_id": "eggscape-route",
-    "storage_bucket": "eggscape-route.firebasestorage.app"
+    "project_number": "820011690685",
+    "project_id": "eggscape-route-f22f5",
+    "storage_bucket": "eggscape-route-f22f5.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:860180975313:ios:5979bca7f64a8bea033ff0",
+        "mobilesdk_app_id": "1:820011690685:ios:1376778cad998dbe56e5d4",
         "android_client_info": {
           "package_name": "com.ADGames.EggscapeRoute"
         }
       },
       "api_key": [
         {
-          "current_key": "AIzaSyAjAg2lajARdHMqTamfi6k8kNx8FszuIqo"
+          "current_key": "AIzaSyAXGr2KBqxZ8Q_4jsV4D127IqEjLX7Cg-g"
         }
       ],
       "services": {
