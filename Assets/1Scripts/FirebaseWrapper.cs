@@ -8,7 +8,7 @@ using System.Collections;
 public class FirebaseWrapper : MonoBehaviour
 {
     // Start is called once before the te after the MonoBehaviour is created
-  
+
 
     private void Start()
     {
@@ -27,9 +27,10 @@ public class FirebaseWrapper : MonoBehaviour
 
 
                 Firebase.Messaging.FirebaseMessaging.TokenReceived += OnTokenRecieved;
-                Firebase.Messaging.FirebaseMessaging.MessageReceived += OnMessageRecieved; 
-                Firebase.Messaging.FirebaseMessaging.SubscribeAsync("TestTopic").ContinueWithOnMainThread(task => {
-                    Debug.Log(  "SubscribeAsync");
+                Firebase.Messaging.FirebaseMessaging.MessageReceived += OnMessageRecieved;
+                Firebase.Messaging.FirebaseMessaging.SubscribeAsync("TestTopic").ContinueWithOnMainThread(task =>
+                {
+                    Debug.Log("SubscribeAsync");
                 });
                 Debug.Log("Firebase Messaging Initialized");
 
@@ -40,10 +41,13 @@ public class FirebaseWrapper : MonoBehaviour
                 // On Android, this will return successfully immediately, as there is no
                 // equivalent system logic to run.
                 Firebase.Messaging.FirebaseMessaging.RequestPermissionAsync().ContinueWithOnMainThread(
-                  task => {
+                  task =>
+                  {
                       Debug.Log("RequestPermissionAsync");
                   }
                 );
+
+                 StartCoroutine(GetTokenAsync()); 
 
             }
             else
@@ -53,29 +57,47 @@ public class FirebaseWrapper : MonoBehaviour
                 // Firebase Unity SDK is not safe to use here.
             }
         });
+    }
 
-        
-        // previous v
-        //Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
-        //{
-        //    var status = task.Result;
+       
 
-        //    if (status == Firebase.DependencyStatus.Available)
-        //    {
-        //        Firebase.FirebaseApp app = Firebase.FirebaseApp.DefaultInstance;
+    private IEnumerator  GetTokenAsync()
+    {
+        var task = FirebaseMessaging.GetTokenAsync();
 
-        //        //StartCoroutine(FirebaseStart());
+        while (!task.IsCompleted)
+            yield return new WaitForEndOfFrame();
 
-        //        Debug.Log("Firebase ini = " + status);
-        //        Firebase.Messaging.FirebaseMessaging.TokenReceived += OnTokenRecieved;
-        //        Firebase.Messaging.FirebaseMessaging.MessageReceived += OnMessageRecieved;
-        //    }
-        //    else
-        //    {
-        //        Debug.LogError("Firebase ERROR = " + status);
-        //    }
-        //});
-    } 
+        Debug.Log("GET TOKEN ASYNC " + task.Result);
+
+        RequestController.FirebaseMessagingToken = task.Result; // e.Token;
+
+        RequestController.FirebaseDataRecieved = true;
+        RequestController.Check();
+    }
+
+
+    // previous v
+    //Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+    //{
+    //    var status = task.Result;
+
+    //    if (status == Firebase.DependencyStatus.Available)
+    //    {
+    //        Firebase.FirebaseApp app = Firebase.FirebaseApp.DefaultInstance;
+
+    //        //StartCoroutine(FirebaseStart());
+
+    //        Debug.Log("Firebase ini = " + status);
+    //        Firebase.Messaging.FirebaseMessaging.TokenReceived += OnTokenRecieved;
+    //        Firebase.Messaging.FirebaseMessaging.MessageReceived += OnMessageRecieved;
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("Firebase ERROR = " + status);
+    //    }
+    //});
+ //} 
 
     private void OnMessageRecieved(object sender, MessageReceivedEventArgs e)
     {
