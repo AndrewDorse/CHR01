@@ -12,34 +12,70 @@ public class FirebaseWrapper : MonoBehaviour
 
     private void Start()
     {
-        Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
-        {
-            var status = task.Result;
+        Debug.Log("Firebase ini start ");
 
-            if (status == Firebase.DependencyStatus.Available)
+        Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+        {
+            var dependencyStatus = task.Result;
+            if (dependencyStatus == Firebase.DependencyStatus.Available)
             {
+                // Create and hold a reference to your FirebaseApp,
+                // where app is a Firebase.FirebaseApp property of your application class.
                 Firebase.FirebaseApp app = Firebase.FirebaseApp.DefaultInstance;
 
-                //StartCoroutine(FirebaseStart());
+                // Set a flag here to indicate whether Firebase is ready to use by your app.
 
 
                 Firebase.Messaging.FirebaseMessaging.TokenReceived += OnTokenRecieved;
-                Firebase.Messaging.FirebaseMessaging.MessageReceived += OnMessageRecieved;
+                Firebase.Messaging.FirebaseMessaging.MessageReceived += OnMessageRecieved; 
+                Firebase.Messaging.FirebaseMessaging.SubscribeAsync("TestTopic").ContinueWithOnMainThread(task => {
+                    Debug.Log(  "SubscribeAsync");
+                });
+                Debug.Log("Firebase Messaging Initialized");
+
+                // On iOS, this will display the prompt to request permission to receive
+                // notifications if the prompt has not already been displayed before. (If
+                // the user already responded to the prompt, thier decision is cached by
+                // the OS and can be changed in the OS settings).
+                // On Android, this will return successfully immediately, as there is no
+                // equivalent system logic to run.
+                Firebase.Messaging.FirebaseMessaging.RequestPermissionAsync().ContinueWithOnMainThread(
+                  task => {
+                      Debug.Log("RequestPermissionAsync");
+                  }
+                );
+
             }
             else
             {
-                Debug.LogError("Firebase ERROR = " + status);
+                UnityEngine.Debug.LogError(System.String.Format(
+                  "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
+                // Firebase Unity SDK is not safe to use here.
             }
-
-
         });
-    }
 
-    private IEnumerator FirebaseStart()
-    {
-        yield return new WaitForSeconds(0.1f);
         
-    }
+        // previous v
+        //Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+        //{
+        //    var status = task.Result;
+
+        //    if (status == Firebase.DependencyStatus.Available)
+        //    {
+        //        Firebase.FirebaseApp app = Firebase.FirebaseApp.DefaultInstance;
+
+        //        //StartCoroutine(FirebaseStart());
+
+        //        Debug.Log("Firebase ini = " + status);
+        //        Firebase.Messaging.FirebaseMessaging.TokenReceived += OnTokenRecieved;
+        //        Firebase.Messaging.FirebaseMessaging.MessageReceived += OnMessageRecieved;
+        //    }
+        //    else
+        //    {
+        //        Debug.LogError("Firebase ERROR = " + status);
+        //    }
+        //});
+    } 
 
     private void OnMessageRecieved(object sender, MessageReceivedEventArgs e)
     {
