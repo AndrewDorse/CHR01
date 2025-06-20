@@ -6,6 +6,8 @@ using System.Collections;
 using System.IO;
 
 
+
+[CreateAssetMenu]
 public class EntitlementsPostProcess : ScriptableObject
 {
     public DefaultAsset m_entitlementsFile;
