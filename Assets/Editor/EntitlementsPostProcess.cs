@@ -46,8 +46,8 @@ public class EntitlementsPostProcess : ScriptableObject
         proj.AddFile(target_name + "/" + file_name, file_name);
         proj.AddBuildProperty(target_guid, "CODE_SIGN_ENTITLEMENTS", target_name + "/" + file_name);
 
-
-        proj.AddFrameworkToProject(target_guid, "UserNotifications.framework", false);
+        proj.AddCapability(target_guid, PBXCapabilityType.PushNotifications, file_name); //, addOptionalFramework, framework)
+      //  proj.AddFrameworkToProject(target_guid, "UserNotifications.framework", false);
 
         proj.WriteToFile(proj_path);
     }
