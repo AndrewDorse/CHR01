@@ -26,13 +26,9 @@ public class FirebaseWrapper : MonoBehaviour
                 // Set a flag here to indicate whether Firebase is ready to use by your app.
 
 
-                Firebase.Messaging.FirebaseMessaging.TokenReceived += OnTokenRecieved;
-                Firebase.Messaging.FirebaseMessaging.MessageReceived += OnMessageRecieved;
-                Firebase.Messaging.FirebaseMessaging.SubscribeAsync("TestTopic").ContinueWithOnMainThread(task =>
-                {
-                    Debug.Log("SubscribeAsync");
-                });
-                Debug.Log("Firebase Messaging Initialized");
+               // Firebase.Messaging.FirebaseMessaging.reg
+
+               
 
                 // On iOS, this will display the prompt to request permission to receive
                 // notifications if the prompt has not already been displayed before. (If
@@ -40,12 +36,7 @@ public class FirebaseWrapper : MonoBehaviour
                 // the OS and can be changed in the OS settings).
                 // On Android, this will return successfully immediately, as there is no
                 // equivalent system logic to run.
-                Firebase.Messaging.FirebaseMessaging.RequestPermissionAsync().ContinueWithOnMainThread(
-                  task =>
-                  {
-                      Debug.Log("RequestPermissionAsync");
-                  }
-                );
+               
 
                  StartCoroutine(GetTokenAsync()); 
 
@@ -70,9 +61,28 @@ public class FirebaseWrapper : MonoBehaviour
 
         Debug.Log("GET TOKEN ASYNC " + task.Result);
 
+        Firebase.Messaging.FirebaseMessaging.TokenReceived += OnTokenRecieved;
+        Firebase.Messaging.FirebaseMessaging.MessageReceived += OnMessageRecieved;
+        Firebase.Messaging.FirebaseMessaging.SubscribeAsync("TestTopic").ContinueWithOnMainThread(task =>
+        {
+            Debug.Log("SubscribeAsync");
+        });
+        Debug.Log("Firebase Messaging Initialized");
+
+        Firebase.Messaging.FirebaseMessaging.RequestPermissionAsync().ContinueWithOnMainThread(
+                 task =>
+                 {
+                     Debug.Log("RequestPermissionAsync");
+                 }
+               );
+
         RequestController.FirebaseMessagingToken = task.Result; // e.Token;
 
         RequestController.FirebaseDataRecieved = true;
+
+
+
+
         RequestController.Check();
     }
 
