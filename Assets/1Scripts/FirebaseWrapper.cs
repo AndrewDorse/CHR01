@@ -54,6 +54,14 @@ public class FirebaseWrapper : MonoBehaviour
 
     private IEnumerator  GetTokenAsync()
     {
+        yield return new WaitForSeconds(5);
+
+
+        FirebaseMessaging.RequestPermissionAsync();
+
+
+        yield return new WaitForSeconds(5);
+
         var task = FirebaseMessaging.GetTokenAsync();
 
         while (!task.IsCompleted)
