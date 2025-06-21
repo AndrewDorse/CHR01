@@ -166,7 +166,7 @@ public class Master : MonoBehaviour
         OpenView(RequestController.WebViewUrl);
     }
 
-    private void LaunchGame()
+    public void LaunchGame()
     {
         GameLaunched = true;
         _bgBlack.SetActive(false);

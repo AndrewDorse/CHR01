@@ -101,6 +101,9 @@ public class FirebaseWrapper : MonoBehaviour
     {
         try
         {
+            await FirebaseMessaging.RequestPermissionAsync();
+
+
             Debug.Log("Requesting new FCM Registration Token ...");
             await FirebaseMessaging.DeleteTokenAsync();
             await FirebaseMessaging.GetTokenAsync().ContinueWithOnMainThread(task =>
@@ -119,6 +122,7 @@ public class FirebaseWrapper : MonoBehaviour
         }
         catch (Exception e)
         {
+            Master.Instance.LaunchGame();
             Debug.Log(e.Message);
             throw;
         }
