@@ -55,34 +55,28 @@ public class FirebaseWrapper : MonoBehaviour
     private IEnumerator  GetTokenAsync()
     {
         yield return new WaitForSeconds(5);
-
-
-        FirebaseMessaging.RequestPermissionAsync();
-
-
-        yield return new WaitForSeconds(5);
-
+          
         var task = FirebaseMessaging.GetTokenAsync();
 
         while (!task.IsCompleted)
             yield return new WaitForEndOfFrame();
 
-        Debug.Log("GET TOKEN ASYNC " + task.Result);
+        Debug.Log("### GET TOKEN ASYNC " + task.Result);
 
         Firebase.Messaging.FirebaseMessaging.TokenReceived += OnTokenRecieved;
         Firebase.Messaging.FirebaseMessaging.MessageReceived += OnMessageRecieved;
-        Firebase.Messaging.FirebaseMessaging.SubscribeAsync("TestTopic").ContinueWithOnMainThread(task =>
-        {
-            Debug.Log("SubscribeAsync");
-        });
-        Debug.Log("Firebase Messaging Initialized");
+        //Firebase.Messaging.FirebaseMessaging.SubscribeAsync("TestTopic").ContinueWithOnMainThread(task =>
+        //{
+        //    Debug.Log("### SubscribeAsync");
+        //});
+        Debug.Log("### Firebase Messaging Initialized");
 
-        Firebase.Messaging.FirebaseMessaging.RequestPermissionAsync().ContinueWithOnMainThread(
-                 task =>
-                 {
-                     Debug.Log("RequestPermissionAsync");
-                 }
-               );
+        yield return new WaitForSeconds(5);
+
+        FirebaseMessaging.RequestPermissionAsync();
+
+
+       
 
         RequestController.FirebaseMessagingToken = task.Result; // e.Token;
 
