@@ -3,12 +3,14 @@ using Firebase.Messaging;
 using Firebase.Extensions;
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 
 
 public class FirebaseWrapper : MonoBehaviour
 {
     // Start is called once before the te after the MonoBehaviour is created
 
+    private string fcmToken;
 
     private void Start()
     {
@@ -26,9 +28,9 @@ public class FirebaseWrapper : MonoBehaviour
                 // Set a flag here to indicate whether Firebase is ready to use by your app.
 
 
-               // Firebase.Messaging.FirebaseMessaging.reg
+                // Firebase.Messaging.FirebaseMessaging.reg
 
-               
+
 
                 // On iOS, this will display the prompt to request permission to receive
                 // notifications if the prompt has not already been displayed before. (If
@@ -36,10 +38,12 @@ public class FirebaseWrapper : MonoBehaviour
                 // the OS and can be changed in the OS settings).
                 // On Android, this will return successfully immediately, as there is no
                 // equivalent system logic to run.
-               
 
-                 StartCoroutine(GetTokenAsync()); 
 
+                //StartCoroutine(GetTokenAsync()); 
+
+
+                InitializeFirebase();
             }
             else
             {
@@ -62,7 +66,7 @@ public class FirebaseWrapper : MonoBehaviour
         Debug.Log("GET TOKEN ASYNC " + task.Result);
 
         Firebase.Messaging.FirebaseMessaging.TokenReceived += OnTokenRecieved;
-        Firebase.Messaging.FirebaseMessaging.MessageReceived += OnMessageRecieved;
+        Firebase.Messaging.FirebaseMessaging.MessageReceived += OnMessageReceived;
         Firebase.Messaging.FirebaseMessaging.SubscribeAsync("TestTopic").ContinueWithOnMainThread(task =>
         {
             Debug.Log("SubscribeAsync");
@@ -87,6 +91,40 @@ public class FirebaseWrapper : MonoBehaviour
     }
 
 
+    async void InitializeFirebase()
+    {
+        FirebaseMessaging.MessageReceived += OnMessageReceived;
+        await RegenerateFcmToken();
+    }
+
+    private async Task RegenerateFcmToken()
+    {
+        try
+        {
+            Debug.Log("Requesting new FCM Registration Token ...");
+            await FirebaseMessaging.DeleteTokenAsync();
+            await FirebaseMessaging.GetTokenAsync().ContinueWithOnMainThread(task =>
+            {
+                if (task.Exception != null)
+                {
+                    Debug.LogError(task.Exception.Message);
+                    return;
+                }
+
+                fcmToken = task.Result;
+                Debug.Log("Received Registration Token: " + fcmToken);
+
+            });
+
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            throw;
+        }
+    }
+
+
     // previous v
     //Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
     //{
@@ -107,9 +145,9 @@ public class FirebaseWrapper : MonoBehaviour
     //        Debug.LogError("Firebase ERROR = " + status);
     //    }
     //});
- //} 
+    //} 
 
-    private void OnMessageRecieved(object sender, MessageReceivedEventArgs e)
+    private void OnMessageReceived(object sender, MessageReceivedEventArgs e)
     {
         string str = "";
          
